@@ -64,13 +64,13 @@ const Home: React.FC = () => {
   }
 
   return (
-    <div className="fade-in">
+    <div className="fade-in h-full flex flex-col">
       {showForm ? (
-        <div className="max-w-md mx-auto">
-          <h1 className="text-4xl font-semibold text-center mb-2">人生不过三万天</h1>
-          <p className="text-center text-gray-500 mb-12">开始记录你的人生旅程</p>
+        <div className="max-w-md mx-auto flex-grow flex flex-col justify-center">
+          <h1 className="text-3xl font-semibold text-center mb-2">人生不过三万天</h1>
+          <p className="text-center text-gray-500 mb-6">开始记录你的人生旅程</p>
           
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700">姓名</label>
               <input
@@ -112,18 +112,18 @@ const Home: React.FC = () => {
           </form>
         </div>
       ) : (
-        <div className="max-w-2xl mx-auto h-screen flex flex-col justify-center items-center px-4 py-4">
-          <h1 className="text-lg font-medium text-center mb-3">{user?.name}的人生</h1>
+        <div className="max-w-2xl mx-auto h-full flex flex-col justify-center items-center px-2">
+          <h1 className="text-base font-medium text-center mb-2">{user?.name}的人生</h1>
           
-          <div className="text-center mb-4">
+          <div className="text-center mb-3">
             <div className="flex items-center justify-center gap-2">
-              <div className="text-base text-gray-400">剩余</div>
-              <div className="text-8xl md:text-[10rem] lg:text-[12rem] font-light tracking-tighter focus-element">
+              <div className="text-sm text-gray-400">剩余</div>
+              <div className="text-6xl md:text-8xl lg:text-9xl font-light tracking-tighter focus-element">
                 {daysLeft}
               </div>
-              <div className="text-base text-gray-400">天</div>
+              <div className="text-sm text-gray-400">天</div>
             </div>
-            <div className="flex justify-center gap-1 text-[10px] text-gray-400 mt-2">
+            <div className="flex justify-center gap-1 text-xs text-gray-400 mt-1">
               <span>{timeLeft.hours.toString().padStart(2, '0')}</span>
               <span>:</span>
               <span>{timeLeft.minutes.toString().padStart(2, '0')}</span>
@@ -132,14 +132,14 @@ const Home: React.FC = () => {
             </div>
           </div>
           
-          <div className="text-center mb-4">
-            <p className="text-base md:text-lg text-gray-500 font-light leading-relaxed max-w-lg mx-auto">"{currentQuote}"</p>
+          <div className="text-center mb-2">
+            <p className="text-sm md:text-base text-gray-500 font-light leading-relaxed max-w-lg mx-auto">"{currentQuote}"</p>
           </div>
           
           <div className="text-center">
             <button
               onClick={() => setShowForm(true)}
-              className="text-[10px] text-gray-300 hover:text-gray-500 transition-colors"
+              className="text-xs text-gray-300 hover:text-gray-500 transition-colors"
             >
               修改信息
             </button>

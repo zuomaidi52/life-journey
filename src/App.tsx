@@ -1,24 +1,25 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Routes, Route, Link, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 import Family from './pages/Family'
 import Milestones from './pages/Milestones'
 import SplashScreen from './components/SplashScreen'
 import { Train, Users, Calendar } from 'lucide-react'
+import { useLifeTrainStore } from './store'
 
 function App() {
   const location = useLocation()
-  const [showSplash, setShowSplash] = useState(true)
+  const { splashCompleted, setSplashCompleted } = useLifeTrainStore()
 
   const isActive = (path: string) => {
     return location.pathname === path
   }
 
   const handleSplashComplete = () => {
-    setShowSplash(false)
+    setSplashCompleted(true)
   }
 
-  if (showSplash) {
+  if (!splashCompleted) {
     return <SplashScreen onComplete={handleSplashComplete} />
   }
 

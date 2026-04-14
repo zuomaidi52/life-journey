@@ -47,6 +47,10 @@ interface LifeTrainState {
   
   // 计算见面次数
   calculateMeetTimes: (familyMemberId: string, meetIntervalDays?: number) => number
+  
+  // 引导界面完成状态
+  splashCompleted: boolean
+  setSplashCompleted: (completed: boolean) => void
 }
 
 // 创建store
@@ -57,9 +61,13 @@ export const useLifeTrainStore = create<LifeTrainState>()(
       user: null,
       familyMembers: [],
       milestones: [],
+      splashCompleted: false,
       
       // 设置用户信息
       setUser: (user) => set({ user }),
+      
+      // 设置引导界面完成状态
+      setSplashCompleted: (completed) => set({ splashCompleted: completed }),
       
       // 添加亲友
       addFamilyMember: (member) => set((state) => ({

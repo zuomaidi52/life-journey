@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useLifeTrainStore } from '../store'
-import { Calendar, Clock, User } from 'lucide-react'
 
 const quotes = [
   "人生就像一场列车旅行，每个人都有自己的终点站。",
@@ -19,7 +18,7 @@ const Home: React.FC = () => {
   const [birthDate, setBirthDate] = useState('')
   const [lifeExpectancy, setLifeExpectancy] = useState(80)
   const [daysLeft, setDaysLeft] = useState(0)
-  const [currentQuote, setCurrentQuote] = useState(quotes[Math.floor(Math.random() * quotes.length)])
+  const [currentQuote] = useState(quotes[Math.floor(Math.random() * quotes.length)])
   const [showForm, setShowForm] = useState(!user)
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 })
 
@@ -62,15 +61,6 @@ const Home: React.FC = () => {
       createdAt: new Date().toISOString()
     })
     setShowForm(false)
-  }
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString('zh-CN', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
   }
 
   return (

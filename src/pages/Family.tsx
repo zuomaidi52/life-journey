@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useLifeTrainStore } from '../store'
-import { Calendar, Clock, Plus, Trash2, Edit2 } from 'lucide-react'
+import { Plus, Trash2, Edit2 } from 'lucide-react'
 import Timeline from '../components/Timeline'
 
 const Family: React.FC = () => {
@@ -108,15 +108,6 @@ const Family: React.FC = () => {
 
   const calculateMeetTimesWithInterval = (familyMemberId: string, meetIntervalDays: number) => {
     return calculateMeetTimes(familyMemberId, meetIntervalDays)
-  }
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString('zh-CN', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
   }
 
   return (

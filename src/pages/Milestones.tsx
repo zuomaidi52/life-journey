@@ -1,13 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLifeTrainStore } from '../store'
 import { Calendar, Plus, Trash2 } from 'lucide-react'
+import { useModifyContext } from '../App'
 
 const Milestones: React.FC = () => {
   const { milestones, addMilestone, removeMilestone } = useLifeTrainStore()
+  const { showMilestonesForm, setShowMilestonesForm } = useModifyContext()
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [date, setDate] = useState('')
-  const [showForm, setShowForm] = useState(false)
+  const [showForm, setShowForm] = useState(showMilestonesForm)
+
+  // 当从上下文接收到显示表单的信号时，更新本地状态
+  useEffect(() => {
+    if (showMilestonesForm) {
+      setShowForm(true)
+    }
+  }, [showMilestonesForm])
 
   const handleAddMilestone = (e: React.FormEvent) => {
     e.preventDefault()

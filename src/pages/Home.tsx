@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLifeTrainStore } from '../store'
+import { useModifyContext } from '../App'
 
 const quotes = [
   "人生就像一场列车旅行，每个人都有自己的终点站。",
@@ -14,13 +15,21 @@ const quotes = [
 
 const Home: React.FC = () => {
   const { user, setUser, calculateDaysLeft } = useLifeTrainStore()
+  const { showHomeForm, setShowHomeForm } = useModifyContext()
   const [name, setName] = useState('')
   const [birthDate, setBirthDate] = useState('')
   const [lifeExpectancy, setLifeExpectancy] = useState(80)
   const [daysLeft, setDaysLeft] = useState(0)
   const [currentQuote] = useState(quotes[Math.floor(Math.random() * quotes.length)])
-  const [showForm, setShowForm] = useState(!user)
+  const [showForm, setShowForm] = useState(!user || showHomeForm)
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 })
+
+  // 当从上下文接收到显示表单的信号时，更新本地状态
+  useEffect(() => {
+    if (showHomeForm) {
+      setShowForm(true)
+    }
+  }, [showHomeForm])
 
   useEffect(() => {
     if (user) {

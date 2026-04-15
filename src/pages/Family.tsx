@@ -1,17 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLifeTrainStore } from '../store'
 import { Plus, Trash2, Edit2 } from 'lucide-react'
 import Timeline from '../components/Timeline'
+import { useModifyContext } from '../App'
 
 const Family: React.FC = () => {
   const { familyMembers, addFamilyMember, removeFamilyMember, updateFamilyMember, calculateDaysLeft, calculateMeetTimes, user } = useLifeTrainStore()
+  const { showFamilyForm, setShowFamilyForm } = useModifyContext()
   const [name, setName] = useState('')
   const [birthDate, setBirthDate] = useState('')
   const [lifeExpectancy, setLifeExpectancy] = useState(80)
-  const [showForm, setShowForm] = useState(false)
+  const [showForm, setShowForm] = useState(showFamilyForm)
   const [editingMember, setEditingMember] = useState<string | null>(null)
   const [meetIntervals, setMeetIntervals] = useState<Record<string, number>>({})
   const [editingMeetInterval, setEditingMeetInterval] = useState<number | null>(null)
+
+  // 当从上下文接收到显示表单的信号时，更新本地状态
+  useEffect(() => {
+    if (showFamilyForm) {
+      setShowForm(true)
+    }
+  }, [showFamilyForm])
 
   const handleAddFamilyMember = (e: React.FormEvent) => {
     e.preventDefault()

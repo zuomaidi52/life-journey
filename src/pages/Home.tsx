@@ -115,15 +115,15 @@ const Home: React.FC = () => {
         <div className="max-w-2xl mx-auto h-screen flex flex-col justify-center items-center px-4 py-4">
           <h1 className="text-lg font-medium text-center mb-3">{user?.name}的人生</h1>
           
-          <div className="text-center mb-4">
-            <div className="flex items-center justify-center gap-2">
-              <div className="text-base text-gray-400">剩余</div>
-              <div className="text-8xl md:text-[10rem] lg:text-[12rem] font-light tracking-tighter focus-element">
+          <div className="text-center mb-6">
+            <div className="flex items-center justify-center gap-3">
+              <div className="text-lg text-gray-500">剩余</div>
+              <div className="text-[10rem] md:text-[14rem] lg:text-[18rem] font-light tracking-tighter focus-element">
                 {daysLeft}
               </div>
-              <div className="text-base text-gray-400">天</div>
+              <div className="text-lg text-gray-500">天</div>
             </div>
-            <div className="flex justify-center gap-1 text-[10px] text-gray-400 mt-2">
+            <div className="flex justify-center gap-2 text-2xl md:text-3xl text-gray-400 mt-4 font-mono">
               <span>{timeLeft.hours.toString().padStart(2, '0')}</span>
               <span>:</span>
               <span>{timeLeft.minutes.toString().padStart(2, '0')}</span>

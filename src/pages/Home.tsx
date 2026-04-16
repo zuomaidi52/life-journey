@@ -35,29 +35,20 @@ const Home: React.FC = () => {
     if (user) {
       const timer = setInterval(() => {
         const now = new Date()
-        const birth = new Date(user.birthDate)
-        const death = new Date(birth)
-        death.setFullYear(birth.getFullYear() + user.lifeExpectancy)
+        const midnightTonight = new Date(now)
+        midnightTonight.setHours(24, 0, 0, 0)
+        const remainingToday = midnightTonight.getTime() - now.getTime()
         
-        const totalMs = death.getTime() - now.getTime()
-        if (totalMs > 0) {
-          const hours = Math.floor((totalMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-          const minutes = Math.floor((totalMs % (1000 * 60 * 60)) / (1000 * 60))
-          const seconds = Math.floor((totalMs % (1000 * 60)) / 1000)
-          setTimeLeft({ hours, minutes, seconds })
-        } else {
-          setTimeLeft({ hours: 0, minutes: 0, seconds: 0 })
-        }
+        const hours = Math.floor(remainingToday / (1000 * 60 * 60))
+        const minutes = Math.floor((remainingToday % (1000 * 60 * 60)) / (1000 * 60))
+        const seconds = Math.floor((remainingToday % (1000 * 60)) / 1000)
+        setTimeLeft({ hours, minutes, seconds })
+
+        const days = calculateDaysLeft(user.birthDate, user.lifeExpectancy)
+        setDaysLeft(days)
       }, 1000)
 
       return () => clearInterval(timer)
-    }
-  }, [user])
-
-  useEffect(() => {
-    if (user) {
-      const days = calculateDaysLeft(user.birthDate, user.lifeExpectancy)
-      setDaysLeft(days)
     }
   }, [user, calculateDaysLeft])
 

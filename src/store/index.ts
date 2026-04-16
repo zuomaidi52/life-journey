@@ -106,10 +106,10 @@ export const useLifeTrainStore = create<LifeTrainState>()(
       
       // 计算剩余天数
       calculateDaysLeft: (birthDate, lifeExpectancy) => {
-        const birth = new Date(birthDate)
+        const [y, m, d] = birthDate.split('-').map(Number)
+        const birth = new Date(y, m - 1, d)
         const today = new Date()
-        const death = new Date(birth)
-        death.setFullYear(birth.getFullYear() + lifeExpectancy)
+        const death = new Date(y + lifeExpectancy, m - 1, d)
         
         const totalDays = Math.floor((death.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
         return Math.max(0, totalDays)

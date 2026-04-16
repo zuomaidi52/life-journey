@@ -46,7 +46,7 @@ const Milestones: React.FC = () => {
   return (
     <div className="fade-in">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-semibold text-center mb-12">人生节点</h1>
+        <h1 className="text-lg font-medium">人生节点</h1>
         
         {!showForm ? (
           <div className="text-center mb-8">
